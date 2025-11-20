@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ecf0f1;
+}
+
+.pagina {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.pagina h2 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.pagina p {
+  color: #7f8c8d;
+  line-height: 1.6;
+}

@@ -1,0 +1,59 @@
+/* Resetear márgenes */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos del menú */
+.menu {
+  background-color: #2c3e50;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.menu h1 {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.links {
+  display: flex;
+  gap: 15px;
+}
+
+.links a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.links a:hover {
+  background-color: #34495e;
+}
+
+/* Link activo */
+.links a.activo {
+  background-color: #3498db;
+}
+
+/* Botón salir */
+.links a.salir {
+  background-color: #e74c3c;
+}
+
+.links a.salir:hover {
+  background-color: #c0392b;
+}
+
+/* Contenedor principal */
+.contenido {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
