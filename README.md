@@ -1,59 +1,86 @@
-# InventarioHospital
+#  Sistema de Inventario Hospitalario
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.5.
+##  Descripción
+Aplicación web para controlar y gestionar el inventario de medicamentos, equipos e insumos médicos de un hospital.
 
-## Development server
+##  Funcionalidades (planeadas)
+-  Login con autenticación
+-  Ver, agregar, editar y eliminar productos
+-  Registrar entradas y salidas de inventario
+-  Alertas de productos con stock bajo
+-  Alertas de productos próximos a vencer
+-  Panel con estadísticas (para administradores)
 
-To start a local development server, run:
+##  Tecnologías Utilizadas
+- **Angular 17+** - Framework principal
+- **Firebase Authentication** - Para login y registro
+- **Firebase Firestore** - Base de datos en la nube
+- **TypeScript** - Lenguaje de programación
+- **HTML/CSS** - Interfaz de usuario
 
+##  Entidades Principales
+
+### Producto
+- Nombre, tipo, cantidad, proveedor
+- Fecha de caducidad
+- Stock mínimo
+
+### Movimiento
+- Entrada o salida de productos
+- Fecha, cantidad, motivo
+- Usuario que lo realizó
+
+##  Roles de Usuario
+- **Almacén**: Gestiona productos y movimientos
+- **Administrador**: Acceso completo + estadísticas
+
+##  Instalación y Ejecución
 ```bash
+# Instalar dependencias
+npm install
+
+# Ejecutar en desarrollo
 ng serve
+
+# Abrir en el navegador
+http://localhost:4200
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+##  Estructura del Proyecto
+```
+src/app/
+├── pages/           # Componentes de páginas
+│   ├── login/
+│   ├── inicio/
+│   ├── productos/
+│   └── movimientos/
+├── services/        # Servicios para Firebase
+├── guards/          # Protección de rutas
+└── models/          # Interfaces de datos
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+##  Estado del Proyecto
 
-```bash
-ng generate --help
-```
+###  Semana 1 (COMPLETADA)
+- Configuración de Angular y Firebase
+- Creación de componentes principales
+- Sistema de rutas y navegación
+- Definición de modelos de datos
 
-## Building
+###  Semana 2 (Próxima)
+- Servicios de Firebase
+- Autenticación funcional
+- CRUD de productos
 
-To build the project run:
+##  Enlaces
+- **Repositorio**: https://github.com/arnoldpeceros/inventario-hospital
+- **Deploy**: [Pendiente]
+- **Video Demo**: [Pendiente - Semana 5]
 
-```bash
-ng build
-```
+##  Desarrollador
+**Nombre**: [Arnold]  
+**Curso**: Programación Web
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+##  Contacto
+[arnold@gmail.com]
