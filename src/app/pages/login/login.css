@@ -1,0 +1,94 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.login-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-box h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.login-box p {
+  text-align: center;
+  color: #7f8c8d;
+  margin-bottom: 2rem;
+}
+
+.error {
+  background-color: #ffe6e6;
+  color: #c0392b;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.campo {
+  margin-bottom: 1.5rem;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.campo input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ecf0f1;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.campo input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.botones {
+  display: flex;
+  gap: 10px;
+}
+
+.botones button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.botones button:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+.botones button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.botones button.secundario {
+  background-color: #2ecc71;
+}
+
+.botones button.secundario:hover:not(:disabled) {
+  background-color: #27ae60;
+}
