@@ -1,4 +1,78 @@
-<div class="pagina">
-  <h2>Productos</h2>
-  <p>Aquí veremos la lista de productos</p>
+<div class="productos-page">
+  <div class="header">
+    <h2> Gestión de Productos</h2>
+    <button (click)="toggleFormulario()" class="btn-agregar">
+      {{ mostrarFormulario ? 'Cancelar' : '+ Agregar Producto' }}
+    </button>
+  </div>
+
+  <!-- Formulario para agregar -->
+  <div class="formulario" *ngIf="mostrarFormulario">
+    <h3>Nuevo Producto</h3>
+    <div class="campos">
+      <div class="campo">
+        <label>Nombre:</label>
+        <input type="text" [(ngModel)]="nuevoProducto.nombre" placeholder="Ej: Paracetamol">
+      </div>
+
+      <div class="campo">
+        <label>Tipo:</label>
+        <select [(ngModel)]="nuevoProducto.tipo">
+          <option value="medicamento">Medicamento</option>
+          <option value="equipo">Equipo</option>
+          <option value="insumo">Insumo</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Cantidad:</label>
+        <input type="number" [(ngModel)]="nuevoProducto.cantidad">
+      </div>
+
+      <div class="campo">
+        <label>Stock Mínimo:</label>
+        <input type="number" [(ngModel)]="nuevoProducto.cantidadMinima">
+      </div>
+
+      <div class="campo">
+        <label>Fecha Caducidad:</label>
+        <input type="date" [(ngModel)]="nuevoProducto.fechaCaducidad">
+      </div>
+
+      <div class="campo">
+        <label>Proveedor:</label>
+        <input type="text" [(ngModel)]="nuevoProducto.proveedor" placeholder="Ej: Farmacia ABC">
+      </div>
+    </div>
+
+    <button (click)="guardarProducto()" class="btn-guardar">Guardar</button>
+  </div>
+
+  <!-- Mensaje de carga -->
+  <div *ngIf="cargando" class="cargando">
+     Cargando productos...
+  </div>
+
+  <!-- Lista de productos -->
+  <div *ngIf="!cargando && productos.length === 0" class="vacio">
+     No hay productos. ¡Agrega el primero!
+  </div>
+
+  <div class="productos-lista" *ngIf="!cargando && productos.length > 0">
+    <div class="producto-card" *ngFor="let producto of productos">
+      <div class="producto-header">
+        <h3>{{ producto.nombre }}</h3>
+        <span class="tipo">{{ producto.tipo }}</span>
+      </div>
+      <div class="producto-info">
+        <p><strong>Cantidad:</strong> {{ producto.cantidad }} unidades</p>
+        <p><strong>Stock mínimo:</strong> {{ producto.cantidadMinima }}</p>
+        <p><strong>Proveedor:</strong> {{ producto.proveedor }}</p>
+        <p><strong>Vence:</strong> {{ producto.fechaCaducidad | date:'dd/MM/yyyy' }}</p>
+      </div>
+      <div class="producto-acciones">
+        <button (click)="eliminar(producto.id)" class="btn-eliminar">Eliminar</button>
+      </div>
+    </div>
+  </div>
 </div>
