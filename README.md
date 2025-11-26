@@ -1,86 +1,167 @@
-#  Sistema de Inventario Hospitalario
+# Sistema de Inventario Hospitalario
 
 ##  Descripción
 Aplicación web para controlar y gestionar el inventario de medicamentos, equipos e insumos médicos de un hospital.
 
-##  Funcionalidades (planeadas)
--  Login con autenticación
--  Ver, agregar, editar y eliminar productos
--  Registrar entradas y salidas de inventario
--  Alertas de productos con stock bajo
--  Alertas de productos próximos a vencer
--  Panel con estadísticas (para administradores)
+##  Funcionalidades Implementadas
+
+###  Semana 1
+- Configuración del proyecto
+- Estructura de componentes y rutas
+
+###  Semana 2
+-  **Autenticación completa**
+  - Registro de usuarios
+  - Inicio de sesión
+  - Cerrar sesión
+-  **Gestión de Productos**
+  - Ver lista de productos
+  - Agregar nuevos productos
+  - Eliminar productos
+  - Conexión con Firebase Firestore
+-  **Protección de rutas**
+  - Solo usuarios logueados pueden acceder
+-  **Dashboard**
+  - Estadísticas de productos
+  - Alertas de stock bajo
+
+###  En Progreso (Semana 3)
+- Editar productos
+- Sistema de movimientos (entradas/salidas)
+- Filtros y búsqueda
+- Alertas de productos próximos a vencer
 
 ##  Tecnologías Utilizadas
 - **Angular 17+** - Framework principal
-- **Firebase Authentication** - Para login y registro
-- **Firebase Firestore** - Base de datos en la nube
+- **Firebase Authentication** - Sistema de login
+- **Firebase Firestore** - Base de datos en tiempo real
 - **TypeScript** - Lenguaje de programación
 - **HTML/CSS** - Interfaz de usuario
 
-##  Entidades Principales
+##  Entidades
 
 ### Producto
-- Nombre, tipo, cantidad, proveedor
-- Fecha de caducidad
-- Stock mínimo
+```typescript
+{
+  id: string,
+  nombre: string,
+  tipo: 'medicamento' | 'equipo' | 'insumo',
+  cantidad: number,
+  cantidadMinima: number,
+  fechaCaducidad: Date,
+  proveedor: string,
+  fechaRegistro: Date
+}
+```
 
-### Movimiento
-- Entrada o salida de productos
-- Fecha, cantidad, motivo
-- Usuario que lo realizó
-
-##  Roles de Usuario
-- **Almacén**: Gestiona productos y movimientos
-- **Administrador**: Acceso completo + estadísticas
+### Movimiento (próximamente)
+```typescript
+{
+  id: string,
+  productoId: string,
+  tipo: 'entrada' | 'salida',
+  cantidad: number,
+  fecha: Date,
+  usuario: string,
+  motivo: string
+}
+```
 
 ##  Instalación y Ejecución
 ```bash
-# Instalar dependencias
+# 1. Clonar el repositorio
+git clone https://github.com/arnoldpeceros/inventario-hospital.git
+
+# 2. Instalar dependencias
 npm install
 
-# Ejecutar en desarrollo
+# 3. Configurar Firebase
+# - Crear archivo src/environments/environment.ts
+# - Agregar credenciales de Firebase
+
+# 4. Ejecutar en desarrollo
 ng serve
 
-# Abrir en el navegador
+# 5. Abrir en el navegador
 http://localhost:4200
 ```
 
-##  Estructura del Proyecto
+## Cómo usar la aplicación
+
+1. **Registrarse:**
+   - Entrar a http://localhost:4200
+   - Poner email y contraseña
+   - Clic en "Registrarse"
+
+2. **Ver Productos:**
+   - Ir a la sección "Productos"
+   - Ver la lista completa
+
+3. **Agregar Producto:**
+   - Clic en "+ Agregar Producto"
+   - Llenar el formulario
+   - Guardar
+
+4. **Eliminar Producto:**
+   - Clic en " Eliminar" en cualquier producto
+   - Confirmar
+
+## Estructura del Proyecto
 ```
 src/app/
-├── pages/           # Componentes de páginas
-│   ├── login/
-│   ├── inicio/
-│   ├── productos/
-│   └── movimientos/
-├── services/        # Servicios para Firebase
-├── guards/          # Protección de rutas
-└── models/          # Interfaces de datos
+├── pages/              # Páginas de la aplicación
+│   ├── login/          #  Login funcional
+│   ├── inicio/         #  Dashboard con estadísticas
+│   ├── productos/      #  CRUD de productos
+│   └── movimientos/    #  En construcción
+├── services/           # Lógica de negocio
+│   ├── auth.service.ts       #  Autenticación
+│   └── productos.service.ts  #  CRUD productos
+├── guards/             # Protección de rutas
+│   └── auth.guard.ts   #  Verificar login
+└── models/             # Tipos de datos
+    └── producto.model.ts  #  Interfaces
 ```
 
-##  Estado del Proyecto
+## Progreso del Proyecto
 
-###  Semana 1 (COMPLETADA)
-- Configuración de Angular y Firebase
-- Creación de componentes principales
-- Sistema de rutas y navegación
-- Definición de modelos de datos
-
-###  Semana 2 (Próxima)
-- Servicios de Firebase
-- Autenticación funcional
-- CRUD de productos
+| Semana | Estado | Descripción |
+|--------|--------|-------------|
+| Semana 1 |  COMPLETADA | Configuración y estructura |
+| Semana 2 |  COMPLETADA | Auth + CRUD Productos |
+| Semana 3 |  En proceso | Movimientos y filtros |
+| Semana 4 |  Pendiente | Validaciones y guards |
+| Semana 5 |  Pendiente | Deploy y documentación |
 
 ##  Enlaces
-- **Repositorio**: https://github.com/arnoldpeceros/inventario-hospital
-- **Deploy**: [Pendiente]
+- **Repositorio GitHub**: https://github.com/arnoldpeceros/inventario-hospital
+- **Firebase Console**: https://console.firebase.google.com/
+- **Deploy**: [Pendiente - Semana 5]
 - **Video Demo**: [Pendiente - Semana 5]
 
+## Capturas (Opcional)
+_(Aquí puedes agregar capturas de pantalla cuando quieras)_
+
 ##  Desarrollador
-**Nombre**: [Arnold]  
-**Curso**: Programación Web
+**Nombre**: [TU NOMBRE AQUÍ]  
+**Curso**: Programación Web con Angular  
+**Profesor**: Ivan Soria Solis  
+**Fecha**: Noviembre 2024
 
+## Notas del Desarrollo
 
-##  Contacto
-[arnold@gmail.com]
+### Aprendizajes Semana 2:
+- Cómo conectar Angular con Firebase
+- Uso de Observables para datos en tiempo real
+- Implementación de Guards para proteger rutas
+- CRUD básico con Firestore
+- Manejo de formularios con ngModel
+
+### Desafíos superados:
+- Configuración inicial de Firebase
+- Sincronización de datos en tiempo real
+- Protección de rutas según autenticación
+
+---
+
+** IMPORTANTE:** Este es un proyecto educativo en desarrollo.

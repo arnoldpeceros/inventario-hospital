@@ -1,0 +1,93 @@
+.inicio-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.inicio-page h2 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.saludo {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Estadísticas */
+.estadisticas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.tarjeta {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.tarjeta .icono {
+  font-size: 3rem;
+}
+
+.tarjeta .info h3 {
+  color: #2c3e50;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.tarjeta .info p {
+  color: #7f8c8d;
+  margin: 0.5rem 0 0 0;
+}
+
+.tarjeta.alerta {
+  border-left: 5px solid #e74c3c;
+}
+
+.tarjeta.ok {
+  border-left: 5px solid #2ecc71;
+}
+
+/* Acciones rápidas */
+.acciones-rapidas {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.acciones-rapidas h3 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+.botones {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.boton {
+  flex: 1;
+  min-width: 200px;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.1rem;
+  transition: transform 0.3s;
+}
+
+.boton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}

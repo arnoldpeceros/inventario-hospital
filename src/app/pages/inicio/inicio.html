@@ -1,5 +1,39 @@
-<div class="pagina">
-  <h2>Página de Inicio</h2>
-  <p>Bienvenido al sistema de inventario</p>
-  <p>Aquí veremos las estadísticas</p>
+<div class="inicio-page">
+  <h2>Bienvenido al Sistema de Inventario</h2>
+  <p class="saludo">Hola, <strong>{{ authService.obtenerEmail() }}</strong></p>
+
+  <div class="estadisticas">
+    <div class="tarjeta">
+      <div class="info">
+        <h3>{{ totalProductos }}</h3>
+        <p>Total de Productos</p>
+      </div>
+    </div>
+
+    <div class="tarjeta alerta" *ngIf="productosBajoStock > 0">
+      <div class="info">
+        <h3>{{ productosBajoStock }}</h3>
+        <p>Productos con Stock Bajo</p>
+      </div>
+    </div>
+
+    <div class="tarjeta ok" *ngIf="productosBajoStock === 0">
+      <div class="info">
+        <h3>Todo bien</h3>
+        <p>Stock normal</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="acciones-rapidas">
+    <h3>Acciones Rápidas</h3>
+    <div class="botones">
+      <a routerLink="/productos" class="boton">
+        Ver Productos
+      </a>
+      <a routerLink="/movimientos" class="boton">
+        Ver Movimientos
+      </a>
+    </div>
+  </div>
 </div>
