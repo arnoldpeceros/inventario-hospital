@@ -1,22 +1,53 @@
 <div class="productos-page">
   <div class="header">
     <h2> Gestión de Productos</h2>
-    <button (click)="toggleFormulario()" class="btn-agregar">
-      {{ mostrarFormulario ? 'Cancelar' : '+ Agregar Producto' }}
+    <button (click)="abrirFormularioAgregar()" class="btn-agregar">
+      + Agregar Producto
     </button>
   </div>
 
-  <!-- Formulario para agregar -->
+  <!-- Barra de búsqueda y ordenamiento -->
+  <div class="controles" *ngIf="!cargando && productos.length > 0">
+    <div class="busqueda">
+      <input 
+        type="text" 
+        [(ngModel)]="textoBusqueda"
+        (ngModelChange)="filtrarProductos()"
+        placeholder="🔍 Buscar por nombre, tipo o proveedor..."
+        class="input-busqueda">
+    </div>
+
+    <div class="ordenamiento">
+      <label>Ordenar por:</label>
+      <button 
+        (click)="ordenarPor('nombre')"
+        [class.activo]="ordenActual === 'nombre'">
+        A-Z
+      </button>
+      <button 
+        (click)="ordenarPor('cantidad')"
+        [class.activo]="ordenActual === 'cantidad'">
+        Cantidad
+      </button>
+      <button 
+        (click)="ordenarPor('fecha')"
+        [class.activo]="ordenActual === 'fecha'">
+        Vencimiento
+      </button>
+    </div>
+  </div>
+
+  <!-- Formulario -->
   <div class="formulario" *ngIf="mostrarFormulario">
-    <h3>Nuevo Producto</h3>
+    <h3>{{ modoEdicion ? ' Editar Producto' : ' Nuevo Producto' }}</h3>
     <div class="campos">
       <div class="campo">
-        <label>Nombre:</label>
+        <label>Nombre: *</label>
         <input type="text" [(ngModel)]="nuevoProducto.nombre" placeholder="Ej: Paracetamol">
       </div>
 
       <div class="campo">
-        <label>Tipo:</label>
+        <label>Tipo: *</label>
         <select [(ngModel)]="nuevoProducto.tipo">
           <option value="medicamento">Medicamento</option>
           <option value="equipo">Equipo</option>
@@ -25,41 +56,56 @@
       </div>
 
       <div class="campo">
-        <label>Cantidad:</label>
-        <input type="number" [(ngModel)]="nuevoProducto.cantidad">
+        <label>Cantidad: *</label>
+        <input type="number" [(ngModel)]="nuevoProducto.cantidad" min="0">
       </div>
 
       <div class="campo">
-        <label>Stock Mínimo:</label>
-        <input type="number" [(ngModel)]="nuevoProducto.cantidadMinima">
+        <label>Stock Mínimo: *</label>
+        <input type="number" [(ngModel)]="nuevoProducto.cantidadMinima" min="0">
       </div>
 
       <div class="campo">
-        <label>Fecha Caducidad:</label>
+        <label>Fecha Caducidad: *</label>
         <input type="date" [(ngModel)]="nuevoProducto.fechaCaducidad">
       </div>
 
       <div class="campo">
-        <label>Proveedor:</label>
+        <label>Proveedor: *</label>
         <input type="text" [(ngModel)]="nuevoProducto.proveedor" placeholder="Ej: Farmacia ABC">
       </div>
     </div>
 
-    <button (click)="guardarProducto()" class="btn-guardar">Guardar</button>
+    <div class="botones-formulario">
+      <button (click)="guardarProducto()" class="btn-guardar">
+        {{ modoEdicion ? ' Actualizar' : ' Guardar' }}
+      </button>
+      <button (click)="cancelarFormulario()" class="btn-cancelar">
+         Cancelar
+      </button>
+    </div>
   </div>
 
-  <!-- Mensaje de carga -->
+  <!-- Cargando -->
   <div *ngIf="cargando" class="cargando">
      Cargando productos...
   </div>
 
-  <!-- Lista de productos -->
+  <!-- Sin productos -->
   <div *ngIf="!cargando && productos.length === 0" class="vacio">
      No hay productos. ¡Agrega el primero!
   </div>
 
-  <div class="productos-lista" *ngIf="!cargando && productos.length > 0">
-    <div class="producto-card" *ngFor="let producto of productos">
+  <!-- Sin resultados de búsqueda -->
+  <div *ngIf="!cargando && productos.length > 0 && productosFiltrados.length === 0" class="vacio">
+     No se encontraron productos con "{{ textoBusqueda }}"
+  </div>
+
+  <!-- Lista de productos -->
+  <div class="productos-lista" *ngIf="!cargando && productosFiltrados.length > 0">
+    <div class="producto-card" 
+         *ngFor="let producto of productosFiltrados"
+         [class.stock-bajo]="tieneStockBajo(producto)">
       <div class="producto-header">
         <h3>{{ producto.nombre }}</h3>
         <span class="tipo">{{ producto.tipo }}</span>
@@ -70,8 +116,19 @@
         <p><strong>Proveedor:</strong> {{ producto.proveedor }}</p>
         <p><strong>Vence:</strong> {{ producto.fechaCaducidad | date:'dd/MM/yyyy' }}</p>
       </div>
+      
+      <!-- Alerta de stock bajo -->
+      <div class="alerta" *ngIf="tieneStockBajo(producto)">
+         Stock bajo
+      </div>
+      
       <div class="producto-acciones">
-        <button (click)="eliminar(producto.id)" class="btn-eliminar">Eliminar</button>
+        <button (click)="abrirFormularioEditar(producto)" class="btn-editar">
+           Editar
+        </button>
+        <button (click)="eliminar(producto.id)" class="btn-eliminar">
+           Eliminar
+        </button>
       </div>
     </div>
   </div>
