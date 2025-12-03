@@ -1,14 +1,79 @@
 <div class="movimientos-page">
-  <h2>Historial de Movimientos</h2>
-  <p class="nota"> Esta funcionalidad</p>
-  
-  <div class="info-box">
-    <h3>¿Qué son los movimientos?</h3>
-    <p>Aquí podrás registrar:</p>
-    <ul>
-      <li> <strong>Entradas:</strong> Cuando compras o recibes productos</li>
-      <li> <strong>Salidas:</strong> Cuando usas o vendes productos</li>
-    </ul>
-    <p>Cada movimiento quedará registrado con fecha, cantidad y motivo.</p>
+  <div class="header">
+    <h2> Historial de Movimientos</h2>
+    <button (click)="toggleFormulario()" class="btn-agregar">
+      {{ mostrarFormulario ? 'Cancelar' : '+ Registrar Movimiento' }}
+    </button>
+  </div>
+
+  <!-- Formulario -->
+  <div class="formulario" *ngIf="mostrarFormulario">
+    <h3>Nuevo Movimiento</h3>
+    <div class="campos">
+      <div class="campo">
+        <label>Producto: *</label>
+        <select [(ngModel)]="nuevoMovimiento.productoId" (ngModelChange)="onProductoSeleccionado()">
+          <option value="">-- Selecciona un producto --</option>
+          <option *ngFor="let producto of productos" [value]="producto.id">
+            {{ producto.nombre }} (Stock: {{ producto.cantidad }})
+          </option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Tipo: *</label>
+        <select [(ngModel)]="nuevoMovimiento.tipo">
+          <option value="entrada"> Entrada (Compra/Recepción)</option>
+          <option value="salida"> Salida (Uso/Venta)</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Cantidad: *</label>
+        <input type="number" [(ngModel)]="nuevoMovimiento.cantidad" min="1">
+      </div>
+
+      <div class="campo campo-completo">
+        <label>Motivo: *</label>
+        <input type="text" [(ngModel)]="nuevoMovimiento.motivo" 
+               placeholder="Ej: Compra mensual, Uso en cirugía, etc.">
+      </div>
+    </div>
+
+    <button (click)="registrarMovimiento()" class="btn-guardar">
+       Registrar
+    </button>
+  </div>
+
+  <!-- Cargando -->
+  <div *ngIf="cargando" class="cargando">
+     Cargando movimientos...
+  </div>
+
+  <!-- Sin movimientos -->
+  <div *ngIf="!cargando && movimientos.length === 0" class="vacio">
+     No hay movimientos registrados
+  </div>
+
+  <!-- Lista de movimientos -->
+  <div class="movimientos-lista" *ngIf="!cargando && movimientos.length > 0">
+    <div class="movimiento-card" 
+         *ngFor="let mov of movimientos"
+         [class.entrada]="mov.tipo === 'entrada'"
+         [class.salida]="mov.tipo === 'salida'">
+      <div class="movimiento-tipo">
+        <span *ngIf="mov.tipo === 'entrada'"></span>
+        <span *ngIf="mov.tipo === 'salida'"></span>
+        <strong>{{ mov.tipo === 'entrada' ? 'ENTRADA' : 'SALIDA' }}</strong>
+      </div>
+
+      <div class="movimiento-info">
+        <h3>{{ mov.productoNombre }}</h3>
+        <p><strong>Cantidad:</strong> {{ mov.cantidad }} unidades</p>
+        <p><strong>Motivo:</strong> {{ mov.motivo }}</p>
+        <p><strong>Usuario:</strong> {{ mov.usuario }}</p>
+        <p><strong>Fecha:</strong> {{ mov.fecha | date:'dd/MM/yyyy HH:mm' }}</p>
+      </div>
+    </div>
   </div>
 </div>
