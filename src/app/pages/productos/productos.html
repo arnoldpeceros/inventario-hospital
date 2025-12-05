@@ -115,6 +115,7 @@
         <p><strong>Stock mínimo:</strong> {{ producto.cantidadMinima }}</p>
         <p><strong>Proveedor:</strong> {{ producto.proveedor }}</p>
         <p><strong>Vence:</strong> {{ producto.fechaCaducidad | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Estado:</strong> {{ producto.fechaCaducidad | diasVencimiento }}</p> 
       </div>
       
       <!-- Alerta de stock bajo -->

@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductosService } from '../../services/productos';
 import { Producto } from '../../models/producto.model';
+import { DiasVencimientoPipe } from '../../pipes/dias-vencimiento-pipe';
 
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DiasVencimientoPipe],
   templateUrl: './productos.html',
   styleUrl: './productos.css'
 })

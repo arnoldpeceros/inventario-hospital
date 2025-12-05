@@ -1,44 +1,50 @@
-# Sistema de Inventario Hospitalario
+#  Sistema de Inventario Hospitalario
 
 ##  Descripción
-Aplicación web para controlar y gestionar el inventario de medicamentos, equipos e insumos médicos de un hospital.
+Aplicación web para controlar y gestionar el inventario de medicamentos, equipos e insumos médicos de un hospital. Permite registrar productos, controlar stock, realizar movimientos de entrada/salida y generar alertas automáticas.
 
-##  Funcionalidades Implementadas
+##  Funcionalidades
 
-###  Semana 1
-- Configuración del proyecto
-- Estructura de componentes y rutas
+### Autenticación
+- Registro de usuarios
+- Inicio de sesión con email y contraseña
+- Cierre de sesión
+- Protección de rutas (solo usuarios autenticados)
 
-###  Semana 2
--  **Autenticación completa**
-  - Registro de usuarios
-  - Inicio de sesión
-  - Cerrar sesión
--  **Gestión de Productos**
-  - Ver lista de productos
-  - Agregar nuevos productos
-  - Eliminar productos
-  - Conexión con Firebase Firestore
--  **Protección de rutas**
-  - Solo usuarios logueados pueden acceder
--  **Dashboard**
-  - Estadísticas de productos
-  - Alertas de stock bajo
+### Gestión de Productos
+- Ver lista completa de productos
+- Agregar nuevos productos
+- Editar productos existentes
+- Eliminar productos
+- Búsqueda en tiempo real
+- Ordenamiento por nombre, cantidad o fecha de vencimiento
+- Alertas visuales de stock bajo
+- Indicador de días hasta vencimiento
 
-###  En Progreso (Semana 3)
-- Editar productos
-- Sistema de movimientos (entradas/salidas)
-- Filtros y búsqueda
-- Alertas de productos próximos a vencer
+### Gestión de Movimientos
+- Registrar entradas de productos (compras/recepciones)
+- Registrar salidas de productos (uso/ventas)
+- Historial completo de movimientos
+- Actualización automática del stock
+
+### Dashboard
+- Estadísticas generales
+- Total de productos en inventario
+- Alertas de productos con stock bajo
+- Total de movimientos registrados
+- Acceso rápido a secciones principales
 
 ##  Tecnologías Utilizadas
-- **Angular 17+** - Framework principal
-- **Firebase Authentication** - Sistema de login
-- **Firebase Firestore** - Base de datos en tiempo real
-- **TypeScript** - Lenguaje de programación
-- **HTML/CSS** - Interfaz de usuario
 
-##  Entidades
+- **Angular 17+** - Framework principal
+- **TypeScript** - Lenguaje de programación
+- **Firebase Authentication** - Sistema de autenticación
+- **Firebase Firestore** - Base de datos en la nube (NoSQL)
+- **Firebase Hosting** - Despliegue de la aplicación
+- **HTML5 & CSS3** - Estructura y estilos
+- **RxJS** - Programación reactiva con Observables
+
+##  Entidades Principales
 
 ### Producto
 ```typescript
@@ -54,11 +60,12 @@ Aplicación web para controlar y gestionar el inventario de medicamentos, equipo
 }
 ```
 
-### Movimiento (próximamente)
+### Movimiento
 ```typescript
 {
   id: string,
   productoId: string,
+  productoNombre: string,
   tipo: 'entrada' | 'salida',
   cantidad: number,
   fecha: Date,
@@ -67,101 +74,164 @@ Aplicación web para controlar y gestionar el inventario de medicamentos, equipo
 }
 ```
 
-##  Instalación y Ejecución
+##  Requisitos para Instalar y Ejecutar
+
+### Prerequisitos
+- Node.js (versión 18 o superior)
+- npm (gestor de paquetes de Node.js)
+- Angular CLI (`npm install -g @angular/cli`)
+
+### Instalación
+
+1. **Clonar el repositorio**
 ```bash
-# 1. Clonar el repositorio
-git clone https://github.com/arnoldpeceros/inventario-hospital.git
+git clone https://github.com/TU-USUARIO/inventario-hospital.git
+cd inventario-hospital
+```
 
-# 2. Instalar dependencias
+2. **Instalar dependencias**
+```bash
 npm install
+```
 
-# 3. Configurar Firebase
-# - Crear archivo src/environments/environment.ts
-# - Agregar credenciales de Firebase
+3. **Configurar Firebase**
+   - Crear un proyecto en [Firebase Console](https://console.firebase.google.com/)
+   - Habilitar Authentication (Email/Password)
+   - Crear base de datos Firestore
+   - Copiar la configuración de Firebase
+   - Crear el archivo `src/environments/environment.ts` con:
+```typescript
+export const environment = {
+  firebase: {
+    apiKey: "tu-api-key",
+    authDomain: "tu-auth-domain",
+    projectId: "tu-project-id",
+    storageBucket: "tu-storage-bucket",
+    messagingSenderId: "tu-messaging-sender-id",
+    appId: "tu-app-id"
+  }
+};
+```
 
-# 4. Ejecutar en desarrollo
+4. **Ejecutar en modo desarrollo**
+```bash
 ng serve
+```
 
-# 5. Abrir en el navegador
+5. **Abrir en el navegador**
+```
 http://localhost:4200
 ```
 
-## Cómo usar la aplicación
+##  Arquitectura del Proyecto
 
-1. **Registrarse:**
-   - Entrar a http://localhost:4200
-   - Poner email y contraseña
-   - Clic en "Registrarse"
-
-2. **Ver Productos:**
-   - Ir a la sección "Productos"
-   - Ver la lista completa
-
-3. **Agregar Producto:**
-   - Clic en "+ Agregar Producto"
-   - Llenar el formulario
-   - Guardar
-
-4. **Eliminar Producto:**
-   - Clic en " Eliminar" en cualquier producto
-   - Confirmar
-
-## Estructura del Proyecto
+### Estructura de Carpetas
 ```
 src/app/
-├── pages/              # Páginas de la aplicación
-│   ├── login/          #  Login funcional
-│   ├── inicio/         #  Dashboard con estadísticas
-│   ├── productos/      #  CRUD de productos
-│   └── movimientos/    #  En construcción
-├── services/           # Lógica de negocio
-│   ├── auth.service.ts       #  Autenticación
-│   └── productos.service.ts  #  CRUD productos
-├── guards/             # Protección de rutas
-│   └── auth.guard.ts   #  Verificar login
-└── models/             # Tipos de datos
-    └── producto.model.ts  #  Interfaces
+├── pages/                    # Componentes de páginas
+│   ├── login/               # Página de autenticación
+│   ├── inicio/              # Dashboard principal
+│   ├── productos/           # Gestión de productos
+│   ├── movimientos/         # Historial de movimientos
+│   └── not-found/           # Página 404
+│
+├── services/                # Lógica de negocio
+│   ├── auth.service.ts      # Autenticación con Firebase
+│   ├── productos.service.ts # CRUD de productos
+│   └── movimientos.service.ts # Gestión de movimientos
+│
+├── guards/                  # Protección de rutas
+│   └── auth.guard.ts        # Verificar autenticación
+│
+├── models/                  # Interfaces y tipos
+│   └── producto.model.ts    # Modelos de datos
+│
+└── pipes/                   # Pipes personalizados
+    └── dias-vencimiento.pipe.ts # Calcular días hasta vencer
 ```
 
-## Progreso del Proyecto
+### Componentes Principales
 
-| Semana | Estado | Descripción |
-|--------|--------|-------------|
-| Semana 1 |  COMPLETADA | Configuración y estructura |
-| Semana 2 |  COMPLETADA | Auth + CRUD Productos |
-| Semana 3 |  En proceso | Movimientos y filtros |
-| Semana 4 |  Pendiente | Validaciones y guards |
-| Semana 5 |  Pendiente | Deploy y documentación |
+**AuthService**: Maneja registro, login y logout de usuarios usando Firebase Authentication.
+
+**ProductosService**: Gestiona todas las operaciones CRUD sobre productos en Firestore (crear, leer, actualizar, eliminar).
+
+**MovimientosService**: Registra y consulta movimientos de entrada/salida del inventario.
+
+**AuthGuard**: Protege las rutas para que solo usuarios autenticados puedan acceder a ciertas páginas.
+
+##  Roles de Usuario
+
+- **Usuario estándar**: Puede gestionar productos y registrar movimientos
+
+##  Reglas de Seguridad
+
+- Solo usuarios autenticados pueden acceder a las páginas principales
+- El login y registro son públicos
+- Todas las operaciones requieren autenticación válida
+
+##  Características de la Interfaz
+
+- Diseño responsivo (se adapta a móviles y tablets)
+- Navegación intuitiva con menú superior
+- Mensajes de confirmación para operaciones importantes
+- Alertas visuales para productos con stock bajo
+- Indicadores de estado de productos (vencidos, próximos a vencer)
+- Búsqueda en tiempo real sin necesidad de botones
 
 ##  Enlaces
-- **Repositorio GitHub**: https://github.com/arnoldpeceros/inventario-hospital
-- **Firebase Console**: https://console.firebase.google.com/
-- **Deploy**: [Pendiente - Semana 5]
-- **Video Demo**: [Pendiente - Semana 5]
 
-## Capturas (Opcional)
-_(Aquí puedes agregar capturas de pantalla cuando quieras)_
+- **Repositorio GitHub**: https://github.com/arnoldpeceros/inventario-hospital
+- **Aplicación Desplegada**: [URL de Firebase Hosting - Pendiente]
+- **Video Demostración**: [URL del video - Pendiente]
+
+##  Manual de Usuario
+
+### 1. Registro e Inicio de Sesión
+1. Acceder a la aplicación
+2. Ingresar email y contraseña
+3. Hacer clic en "Registrarse" (primera vez) o "Iniciar Sesión"
+
+### 2. Agregar un Producto
+1. Ir a la sección "Productos"
+2. Hacer clic en "+ Agregar Producto"
+3. Llenar todos los campos del formulario
+4. Hacer clic en "Guardar"
+
+### 3. Editar un Producto
+1. En la lista de productos, buscar el producto deseado
+2. Hacer clic en " Editar"
+3. Modificar los campos necesarios
+4. Hacer clic en "Actualizar"
+
+### 4. Buscar y Ordenar Productos
+1. Usar la barra de búsqueda para filtrar productos
+2. Usar los botones de ordenamiento (A-Z, Cantidad, Vencimiento)
+
+### 5. Registrar Movimientos
+1. Ir a la sección "Movimientos"
+2. Hacer clic en "+ Registrar Movimiento"
+3. Seleccionar el producto
+4. Elegir tipo (Entrada o Salida)
+5. Indicar cantidad y motivo
+6. Hacer clic en "Registrar"
+
+### 6. Ver Estadísticas
+1. Ir a la página "Inicio"
+2. Visualizar las tarjetas con estadísticas generales
 
 ##  Desarrollador
-**Nombre**: [TU NOMBRE AQUÍ]  
+
+**Nombre**: [TU NOMBRE COMPLETO]  
 **Curso**: Programación Web con Angular  
+**Institución**: [Tu institución]  
 **Profesor**: Ivan Soria Solis  
-**Fecha**: Noviembre 2024
+**Fecha**: Diciembre 2025
 
-## Notas del Desarrollo
+##  Contacto
 
-### Aprendizajes Semana 2:
-- Cómo conectar Angular con Firebase
-- Uso de Observables para datos en tiempo real
-- Implementación de Guards para proteger rutas
-- CRUD básico con Firestore
-- Manejo de formularios con ngModel
-
-### Desafíos superados:
-- Configuración inicial de Firebase
-- Sincronización de datos en tiempo real
-- Protección de rutas según autenticación
+Email: [tu-email@ejemplo.com]  
+GitHub: [TU-USUARIO]
 
 ---
 
-** IMPORTANTE:** Este es un proyecto educativo en desarrollo.

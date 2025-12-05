@@ -1,9 +1,10 @@
 <div class="inicio-page">
-  <h2>Bienvenido al Sistema de Inventario</h2>
+  <h2> Bienvenido al Sistema de Inventario</h2>
   <p class="saludo">Hola, <strong>{{ authService.obtenerEmail() }}</strong></p>
 
   <div class="estadisticas">
     <div class="tarjeta">
+      <div class="icono"></div>
       <div class="info">
         <h3>{{ totalProductos }}</h3>
         <p>Total de Productos</p>
@@ -11,6 +12,7 @@
     </div>
 
     <div class="tarjeta alerta" *ngIf="productosBajoStock > 0">
+      <div class="icono"></div>
       <div class="info">
         <h3>{{ productosBajoStock }}</h3>
         <p>Productos con Stock Bajo</p>
@@ -18,9 +20,18 @@
     </div>
 
     <div class="tarjeta ok" *ngIf="productosBajoStock === 0">
+      <div class="icono"></div>
       <div class="info">
         <h3>Todo bien</h3>
         <p>Stock normal</p>
+      </div>
+    </div>
+
+    <div class="tarjeta">
+      <div class="icono"></div>
+      <div class="info">
+        <h3>{{ totalMovimientos }}</h3>
+        <p>Movimientos Registrados</p>
       </div>
     </div>
   </div>
@@ -29,10 +40,10 @@
     <h3>Acciones Rápidas</h3>
     <div class="botones">
       <a routerLink="/productos" class="boton">
-        Ver Productos
+         Ver Productos
       </a>
       <a routerLink="/movimientos" class="boton">
-        Ver Movimientos
+         Ver Movimientos
       </a>
     </div>
   </div>
