@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductosService } from '../../services/productos';
 import { Producto } from '../../models/producto.model';
 import { DiasVencimientoPipe } from '../../pipes/dias-vencimiento-pipe';
+import { MensajesService } from '../../services/mensajes';
 
 @Component({
   selector: 'app-productos',
@@ -31,7 +32,10 @@ export class Productos implements OnInit {
   // Variable para ordenamiento
   ordenActual: string = 'nombre'; // nombre, cantidad, fecha
 
-  constructor(private productosService: ProductosService) {}
+  constructor(
+    private productosService: ProductosService,
+    private mensajesService: MensajesService
+  ) {}
 
   ngOnInit() {
     this.productosService.obtenerProductos().subscribe({
@@ -91,27 +95,27 @@ export class Productos implements OnInit {
         // EDITAR
         this.productosService.actualizarProducto(this.productoEditandoId, this.nuevoProducto)
           .then(() => {
-            console.log('Producto actualizado');
+            this.mensajesService.mostrarExito(' Producto actualizado correctamente');
             this.cancelarFormulario();
           })
           .catch((error) => {
             console.error('Error al actualizar:', error);
-            alert('Error al actualizar el producto');
+            this.mensajesService.mostrarError(' Error al actualizar el producto');
           });
       } else {
         // AGREGAR
         this.productosService.agregarProducto(this.nuevoProducto)
           .then(() => {
-            console.log('Producto agregado');
+            this.mensajesService.mostrarExito(' Producto agregado correctamente');
             this.cancelarFormulario();
           })
           .catch((error) => {
             console.error('Error al agregar:', error);
-            alert('Error al agregar el producto');
+            this.mensajesService.mostrarError(' Error al agregar el producto');
           });
       }
     } else {
-      alert('Por favor completa todos los campos obligatorios');
+      this.mensajesService.mostrarAdvertencia(' Completa todos los campos obligatorios');
     }
   }
 
@@ -120,11 +124,11 @@ export class Productos implements OnInit {
     if (id && confirm('¿Estás seguro de eliminar este producto?')) {
       this.productosService.eliminarProducto(id)
         .then(() => {
-          console.log('Producto eliminado');
+          this.mensajesService.mostrarExito(' Producto eliminado correctamente');
         })
         .catch((error) => {
           console.error('Error al eliminar:', error);
-          alert('Error al eliminar el producto');
+          this.mensajesService.mostrarError(' Error al eliminar el producto');
         });
     }
   }

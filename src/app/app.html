@@ -1,8 +1,11 @@
+<!-- Componente de notificaciones  -->
+<app-notificacion></app-notificacion>
+
 <!-- Menú superior -->
 <nav class="menu" *ngIf="authService.estaLogueado()">
-  <h1>Inventario Hospital</h1>
+  <h1> Inventario Hospital</h1>
   <div class="links">
-    <span class="usuario">👤 {{ authService.obtenerEmail() }}</span>
+    <span class="usuario"> {{ authService.obtenerEmail() }}</span>
     <a routerLink="/inicio" routerLinkActive="activo">Inicio</a>
     <a routerLink="/productos" routerLinkActive="activo">Productos</a>
     <a routerLink="/movimientos" routerLinkActive="activo">Movimientos</a>

@@ -1,0 +1,19 @@
+<div class="notificacion-container" *ngIf="(mensaje$ | async)?.visible">
+  <div class="notificacion" 
+       [class.exito]="(mensaje$ | async)?.tipo === 'exito'"
+       [class.error]="(mensaje$ | async)?.tipo === 'error'"
+       [class.info]="(mensaje$ | async)?.tipo === 'info'"
+       [class.advertencia]="(mensaje$ | async)?.tipo === 'advertencia'">
+    
+    <span class="icono">
+      <span *ngIf="(mensaje$ | async)?.tipo === 'exito'"></span>
+      <span *ngIf="(mensaje$ | async)?.tipo === 'error'"></span>
+      <span *ngIf="(mensaje$ | async)?.tipo === 'info'"></span>
+      <span *ngIf="(mensaje$ | async)?.tipo === 'advertencia'"></span>
+    </span>
+    
+    <span class="texto">{{ (mensaje$ | async)?.texto }}</span>
+    
+    <button class="cerrar" (click)="cerrar()">✕</button>
+  </div>
+</div>
