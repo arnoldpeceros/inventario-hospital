@@ -1,0 +1,152 @@
+<div class="estadisticas-page">
+  <h2> Estadísticas del Sistema</h2>
+  <p class="subtitulo">Panel administrativo con métricas detalladas</p>
+
+  <!-- Resumen General -->
+  <div class="seccion">
+    <h3> Resumen General</h3>
+    <div class="tarjetas">
+      <div class="tarjeta">
+        <div class="tarjeta-header">
+          <span class="icono"></span>
+          <h4>Total Productos</h4>
+        </div>
+        <p class="numero">{{ totalProductos }}</p>
+      </div>
+
+      <div class="tarjeta alerta" *ngIf="productosBajoStock > 0">
+        <div class="tarjeta-header">
+          <span class="icono"></span>
+          <h4>Stock Bajo</h4>
+        </div>
+        <p class="numero">{{ productosBajoStock }}</p>
+        <p class="porcentaje">{{ obtenerPorcentaje(productosBajoStock) }}% del total</p>
+      </div>
+
+      <div class="tarjeta peligro" *ngIf="productosVencidos > 0">
+        <div class="tarjeta-header">
+          <span class="icono"></span>
+          <h4>Vencidos</h4>
+        </div>
+        <p class="numero">{{ productosVencidos }}</p>
+        <p class="porcentaje">{{ obtenerPorcentaje(productosVencidos) }}% del total</p>
+      </div>
+
+      <div class="tarjeta advertencia" *ngIf="productosProximosVencer > 0">
+        <div class="tarjeta-header">
+          <span class="icono"></span>
+          <h4>Próximos a Vencer</h4>
+        </div>
+        <p class="numero">{{ productosProximosVencer }}</p>
+        <p class="subtexto">En los próximos 30 días</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Por Tipo de Producto -->
+  <div class="seccion">
+    <h3> Productos por Tipo</h3>
+    <div class="tarjetas">
+      <div class="tarjeta tipo">
+        <span class="icono-grande"></span>
+        <h4>Medicamentos</h4>
+        <p class="numero">{{ medicamentos }}</p>
+        <div class="barra-progreso">
+          <div class="progreso" [style.width.%]="obtenerPorcentaje(medicamentos)"></div>
+        </div>
+        <p class="porcentaje-texto">{{ obtenerPorcentaje(medicamentos) }}%</p>
+      </div>
+
+      <div class="tarjeta tipo">
+        <span class="icono-grande"></span>
+        <h4>Equipos</h4>
+        <p class="numero">{{ equipos }}</p>
+        <div class="barra-progreso">
+          <div class="progreso" [style.width.%]="obtenerPorcentaje(equipos)"></div>
+        </div>
+        <p class="porcentaje-texto">{{ obtenerPorcentaje(equipos) }}%</p>
+      </div>
+
+      <div class="tarjeta tipo">
+        <span class="icono-grande"></span>
+        <h4>Insumos</h4>
+        <p class="numero">{{ insumos }}</p>
+        <div class="barra-progreso">
+          <div class="progreso" [style.width.%]="obtenerPorcentaje(insumos)"></div>
+        </div>
+        <p class="porcentaje-texto">{{ obtenerPorcentaje(insumos) }}%</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Movimientos -->
+  <div class="seccion">
+    <h3> Actividad de Movimientos</h3>
+    <div class="tarjetas">
+      <div class="tarjeta movimiento entrada">
+        <div class="tarjeta-header">
+          <span class="icono"></span>
+          <h4>Entradas</h4>
+        </div>
+        <p class="numero">{{ totalEntradas }}</p>
+        <p class="subtexto">Movimientos registrados</p>
+      </div>
+
+      <div class="tarjeta movimiento salida">
+        <div class="tarjeta-header">
+          <span class="icono"></span>
+          <h4>Salidas</h4>
+        </div>
+        <p class="numero">{{ totalSalidas }}</p>
+        <p class="subtexto">Movimientos registrados</p>
+      </div>
+
+      <div class="tarjeta movimiento">
+        <div class="tarjeta-header">
+          <span class="icono"></span>
+          <h4>Total Movimientos</h4>
+        </div>
+        <p class="numero">{{ totalEntradas + totalSalidas }}</p>
+        <p class="subtexto">Actividad total</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alertas y Recomendaciones -->
+  <div class="seccion">
+    <h3> Recomendaciones</h3>
+    <div class="recomendaciones">
+      <div class="recomendacion alerta" *ngIf="productosBajoStock > 0">
+        <span class="icono"></span>
+        <div>
+          <h4>Atención Requerida</h4>
+          <p>Hay {{ productosBajoStock }} productos con stock bajo. Considera reabastecer pronto.</p>
+        </div>
+      </div>
+
+      <div class="recomendacion peligro" *ngIf="productosVencidos > 0">
+        <span class="icono"></span>
+        <div>
+          <h4>Acción Inmediata</h4>
+          <p>{{ productosVencidos }} productos están vencidos. Revisa y retira del inventario.</p>
+        </div>
+      </div>
+
+      <div class="recomendacion advertencia" *ngIf="productosProximosVencer > 0">
+        <span class="icono"></span>
+        <div>
+          <h4>Planificación</h4>
+          <p>{{ productosProximosVencer }} productos vencen en los próximos 30 días.</p>
+        </div>
+      </div>
+
+      <div class="recomendacion ok" *ngIf="productosBajoStock === 0 && productosVencidos === 0">
+        <span class="icono"></span>
+        <div>
+          <h4>Todo en Orden</h4>
+          <p>El inventario está en buen estado. No hay alertas críticas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

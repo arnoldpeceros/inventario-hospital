@@ -1,0 +1,175 @@
+.estadisticas-page {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.estadisticas-page h2 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.subtitulo {
+  color: #7f8c8d;
+  margin-bottom: 2rem;
+}
+
+/* Secciones */
+.seccion {
+  margin-bottom: 3rem;
+}
+
+.seccion h3 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+/* Tarjetas */
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.tarjeta {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+}
+
+.tarjeta-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tarjeta-header h4 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.icono {
+  font-size: 1.5rem;
+}
+
+.icono-grande {
+  font-size: 3rem;
+  display: block;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.numero {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0.5rem 0;
+}
+
+.porcentaje, .subtexto, .porcentaje-texto {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Tarjetas con colores */
+.tarjeta.alerta {
+  border-left: 5px solid #f39c12;
+}
+
+.tarjeta.peligro {
+  border-left: 5px solid #e74c3c;
+}
+
+.tarjeta.advertencia {
+  border-left: 5px solid #e67e22;
+}
+
+.tarjeta.ok {
+  border-left: 5px solid #2ecc71;
+}
+
+/* Tarjetas de tipo */
+.tarjeta.tipo {
+  text-align: center;
+}
+
+/* Barra de progreso */
+.barra-progreso {
+  width: 100%;
+  height: 10px;
+  background-color: #ecf0f1;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.progreso {
+  height: 100%;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  transition: width 0.5s ease;
+}
+
+/* Tarjetas de movimiento */
+.tarjeta.movimiento.entrada {
+  border-left: 5px solid #2ecc71;
+}
+
+.tarjeta.movimiento.salida {
+  border-left: 5px solid #e74c3c;
+}
+
+/* Recomendaciones */
+.recomendaciones {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.recomendacion {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.recomendacion .icono {
+  font-size: 2rem;
+}
+
+.recomendacion h4 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+}
+
+.recomendacion p {
+  margin: 0;
+  color: #7f8c8d;
+}
+
+.recomendacion.alerta {
+  border-left: 5px solid #f39c12;
+}
+
+.recomendacion.peligro {
+  border-left: 5px solid #e74c3c;
+}
+
+.recomendacion.advertencia {
+  border-left: 5px solid #e67e22;
+}
+
+.recomendacion.ok {
+  border-left: 5px solid #2ecc71;
+}

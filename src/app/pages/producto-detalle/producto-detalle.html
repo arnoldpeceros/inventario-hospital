@@ -1,0 +1,105 @@
+<div class="detalle-page">
+  <!-- Cargando -->
+  <div *ngIf="cargando" class="cargando">
+     Cargando detalles del producto...
+  </div>
+
+  <!-- Detalles del producto -->
+  <div *ngIf="!cargando && producto" class="contenido-detalle">
+    
+    <!-- Header -->
+    <div class="header">
+      <button (click)="volver()" class="btn-volver">
+        ← Volver a Productos
+      </button>
+      <h2> Detalles del Producto</h2>
+    </div>
+
+    <!-- Tarjeta principal del producto -->
+    <div class="producto-card" [class.stock-bajo]="tieneStockBajo()">
+      <div class="producto-header">
+        <div>
+          <h3>{{ producto.nombre }}</h3>
+          <span class="tipo">{{ producto.tipo }}</span>
+        </div>
+        <div class="acciones">
+          <a [routerLink]="['/productos']" class="btn-editar">
+             Editar
+          </a>
+        </div>
+      </div>
+
+      <div class="producto-info-grid">
+        <div class="info-item">
+          <span class="label"> Cantidad Actual:</span>
+          <span class="valor grande">{{ producto.cantidad }} unidades</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label"> Stock Mínimo:</span>
+          <span class="valor">{{ producto.cantidadMinima }} unidades</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label"> Proveedor:</span>
+          <span class="valor">{{ producto.proveedor }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label"> Fecha de Caducidad:</span>
+          <span class="valor">{{ producto.fechaCaducidad | date:'dd/MM/yyyy' }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label"> Estado de Vencimiento:</span>
+          <span class="valor estado">{{ producto.fechaCaducidad | diasVencimiento }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label"> Fecha de Registro:</span>
+          <span class="valor">{{ producto.fechaRegistro | date:'dd/MM/yyyy' }}</span>
+        </div>
+      </div>
+
+      <!-- Alerta de stock bajo -->
+      <div class="alerta-stock" *ngIf="tieneStockBajo()">
+         <strong>Alerta:</strong> Este producto tiene stock bajo. Considera reabastecer pronto.
+      </div>
+    </div>
+
+    <!-- Historial de Movimientos -->
+    <div class="movimientos-seccion">
+      <h3> Historial de Movimientos</h3>
+      
+      <div *ngIf="movimientos.length === 0" class="sin-movimientos">
+         No hay movimientos registrados para este producto
+      </div>
+
+      <div class="movimientos-lista" *ngIf="movimientos.length > 0">
+        <div class="movimiento-item" 
+             *ngFor="let mov of movimientos"
+             [class.entrada]="mov.tipo === 'entrada'"
+             [class.salida]="mov.tipo === 'salida'">
+          
+          <div class="movimiento-icono">
+            <span *ngIf="mov.tipo === 'entrada'"></span>
+            <span *ngIf="mov.tipo === 'salida'"></span>
+          </div>
+
+          <div class="movimiento-info">
+            <div class="movimiento-tipo">
+              <strong>{{ mov.tipo === 'entrada' ? 'ENTRADA' : 'SALIDA' }}</strong>
+              <span class="cantidad">{{ mov.cantidad }} unidades</span>
+            </div>
+            <p class="motivo">{{ mov.motivo }}</p>
+            <div class="movimiento-meta">
+              <span> {{ mov.usuario }}</span>
+              <span> {{ mov.fecha | date:'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

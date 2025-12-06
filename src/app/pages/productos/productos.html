@@ -13,7 +13,7 @@
         type="text" 
         [(ngModel)]="textoBusqueda"
         (ngModelChange)="filtrarProductos()"
-        placeholder="🔍 Buscar por nombre, tipo o proveedor..."
+        placeholder=" Buscar por nombre, tipo o proveedor..."
         class="input-busqueda">
     </div>
 
@@ -124,6 +124,9 @@
       </div>
       
       <div class="producto-acciones">
+        <a [routerLink]="['/productos', producto.id]" class="btn-detalle">
+           Ver Detalle
+        </a>
         <button (click)="abrirFormularioEditar(producto)" class="btn-editar">
            Editar
         </button>

@@ -5,11 +5,12 @@ import { ProductosService } from '../../services/productos';
 import { Producto } from '../../models/producto.model';
 import { DiasVencimientoPipe } from '../../pipes/dias-vencimiento-pipe';
 import { MensajesService } from '../../services/mensajes';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [CommonModule, FormsModule, DiasVencimientoPipe],
+  imports: [CommonModule, FormsModule, DiasVencimientoPipe, RouterLink],
   templateUrl: './productos.html',
   styleUrl: './productos.css'
 })

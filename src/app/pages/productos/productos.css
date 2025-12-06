@@ -262,3 +262,28 @@
 .btn-eliminar:hover {
   background-color: #c0392b;
 }
+
+/* Botón de detalle */
+.btn-detalle {
+  flex: 1;
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.btn-detalle:hover {
+  background-color: #2980b9;
+}
+
+.producto-acciones {
+  margin-top: 1rem;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}

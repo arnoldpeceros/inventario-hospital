@@ -1,0 +1,204 @@
+.detalle-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.cargando {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+/* Header */
+.header {
+  margin-bottom: 2rem;
+}
+
+.btn-volver {
+  padding: 10px 20px;
+  background-color: #95a5a6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s;
+}
+
+.btn-volver:hover {
+  background-color: #7f8c8d;
+}
+
+.header h2 {
+  color: #2c3e50;
+}
+
+/* Tarjeta del producto */
+.producto-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.producto-card.stock-bajo {
+  border-left: 5px solid #e74c3c;
+}
+
+.producto-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.producto-header h3 {
+  color: #2c3e50;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.8rem;
+}
+
+.tipo {
+  background-color: #3498db;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.btn-editar {
+  padding: 8px 16px;
+  background-color: #f39c12;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn-editar:hover {
+  background-color: #e67e22;
+}
+
+/* Grid de información */
+.producto-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.valor {
+  color: #2c3e50;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.valor.grande {
+  font-size: 1.5rem;
+  color: #3498db;
+}
+
+.valor.estado {
+  color: #2ecc71;
+}
+
+/* Alerta de stock */
+.alerta-stock {
+  background-color: #ffe6e6;
+  color: #e74c3c;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+/* Movimientos */
+.movimientos-seccion {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.movimientos-seccion h3 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+.sin-movimientos {
+  text-align: center;
+  padding: 2rem;
+  color: #7f8c8d;
+}
+
+.movimientos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.movimiento-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.movimiento-item.entrada {
+  border-left: 4px solid #2ecc71;
+}
+
+.movimiento-item.salida {
+  border-left: 4px solid #e74c3c;
+}
+
+.movimiento-icono {
+  font-size: 2rem;
+}
+
+.movimiento-info {
+  flex: 1;
+}
+
+.movimiento-tipo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.movimiento-tipo strong {
+  color: #2c3e50;
+}
+
+.cantidad {
+  color: #3498db;
+  font-weight: bold;
+}
+
+.motivo {
+  color: #7f8c8d;
+  margin: 0.5rem 0;
+}
+
+.movimiento-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: #95a5a6;
+}
